@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Travel extends Model
 {
@@ -28,8 +28,10 @@ class Travel extends Model
         return $this->hasMany(Tour::class);
     }
 
-    public function getNumberOfNightsAttribute()
+    public function numOfNights(): Attribute
     {
-        return $this->num_of_days - 1;
+        return Attribute::make(
+            get: fn($value, $attributes) => $attributes['num_of_days'] - 1,
+        );
     }
 }

@@ -69,7 +69,6 @@ namespace App\Models{
  * @property int $num_of_days
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read mixed $number_of_nights
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tour> $tours
  * @property-read int|null $tours_count
  * @method static \Illuminate\Database\Eloquent\Builder|Travel findSimilarSlugs(string $attribute, array $config, string $slug)
