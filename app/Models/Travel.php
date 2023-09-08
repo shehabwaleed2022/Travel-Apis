@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Travel extends Model
 {
-    use HasFactory, Sluggable, HasUuids;
+    use HasFactory, HasUuids, Sluggable;
 
     protected $fillable = ['is_public', 'slug', 'name', 'description', 'num_of_days'];
 
@@ -31,7 +31,12 @@ class Travel extends Model
     public function numOfNights(): Attribute
     {
         return Attribute::make(
-            get: fn($value, $attributes) => $attributes['num_of_days'] - 1,
+            get: fn ($value, $attributes) => $attributes['num_of_days'] - 1,
         );
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

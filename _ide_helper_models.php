@@ -42,6 +42,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Travel $travel
+ * @method static \Database\Factories\TourFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Tour filter(array $filters)
  * @method static \Illuminate\Database\Eloquent\Builder|Tour newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tour newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tour query()
@@ -71,6 +73,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tour> $tours
  * @property-read int|null $tours_count
+ * @method static \Database\Factories\TravelFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Travel findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static \Illuminate\Database\Eloquent\Builder|Travel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Travel newQuery()

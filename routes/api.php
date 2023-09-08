@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\v1\Travel\GetPublicTravelController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\v1\Tour\TourController;
+use App\Http\Controllers\Api\v1\Travel\GetPublicTravelController;
 
-/*
+/*ل
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
@@ -14,4 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('travels/public', GetPublicTravelController::class);
+Route::get('travels/public', GetPublicTravelController::class)->name('travels.public.index');
+
+Route::get('travels/{travel}/tours', [TourController::class, 'index'])->name('travels.tours.index');
