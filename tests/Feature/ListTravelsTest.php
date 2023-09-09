@@ -8,9 +8,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ListTravelsTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
     use RefreshDatabase;
 
     public function test_public_travel_retireved_successfully(): void
