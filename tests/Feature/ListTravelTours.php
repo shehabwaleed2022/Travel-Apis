@@ -21,9 +21,37 @@ class ListTravelTours extends TestCase
 
         $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours');
 
+        $response->assertStatus(200);
         $response->assertJsonFragment(['id' => $tours->id]);
         $response->assertJsonCount(15, 'data');
         $response->assertJsonFragment(['travel_id' => $travel->id]);
-        $response->assertStatus(200);
     }
+
+    public function test_tours_list_filters(): void
+    {
+        $travel = Travel::factory()->create();
+        $tourWithPrice120 = Tour::factory()->create([
+            'travel_id' => $travel->id,
+            'price' => 120,
+        ]);
+        $tourWithPrice400 = Tour::factory()->create([
+            'travel_id' => $travel->id,
+            'price' => 400,
+        ]);
+
+        // Test price filter
+        $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours?priceFrom=110');
+        $response->assertStatus(200);
+        $response->assertJsonCount(1,'data');
+        $response->assertJsonFragment(['id' => $tourWithPrice120->id]);
+
+        $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours?priceFrom=150');
+        $response->assertStatus(200);
+        $response->assertJsonCount(1,'data');
+        $response->assertJsonFragment(['id' => $tourWithPrice120->id]);
+        // Test date filter
+
+    }
+
+    // Test ordering filter
 }
