@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\v1\Auth\SessionController;
 use App\Http\Controllers\Api\v1\Tour\TourController;
 use App\Http\Controllers\Api\v1\Travel\GetPublicTravelController;
+use Illuminate\Support\Facades\Route;
 
 /*ل
 |--------------------------------------------------------------------------
@@ -18,3 +19,6 @@ use App\Http\Controllers\Api\v1\Travel\GetPublicTravelController;
 Route::get('travels/public', GetPublicTravelController::class)->name('travels.public.index');
 
 Route::get('travels/{travel}/tours', [TourController::class, 'index'])->name('travels.tours.index');
+
+Route::post('login', [SessionController::class, 'store']);
+Route::post('logout', [SessionController::class, 'destroy']);
