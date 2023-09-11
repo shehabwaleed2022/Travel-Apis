@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers\Api\v1\admin;
 
-use App\Actions\TravelActions\CreateTravelAction;
 use App\Helpers\ApiResponse;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Travel\StoreTravelRequest;
-use App\Http\Resources\TravelResource;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\TravelResource;
+use App\Http\Requests\Travel\StoreTravelRequest;
+use App\Actions\TravelActions\CreateTravelAction;
 
-class TravelController extends Controller
+class CreateTravelController extends Controller
 {
-    public function store(StoreTravelRequest $request, CreateTravelAction $createTravelAction)
+    /**
+     * Handle the incoming request.
+     */
+    public function __invoke(StoreTravelRequest $request, CreateTravelAction $createTravelAction)
     {
         $travel = $createTravelAction->execute($request->validated());
 
