@@ -52,5 +52,4 @@ class Tour extends Model
             $query->sortOrder($sortOrder);
         });
     }
-
 }

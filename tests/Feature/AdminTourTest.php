@@ -43,11 +43,11 @@ class AdminTourTest extends TestCase
 
         $travel = Travel::factory()->create();
 
-        $response = $this->actingAs($user)->postJson('/api/v1/admin/travels/'.$travel->slug.'/tours',[
+        $response = $this->actingAs($user)->postJson('/api/v1/admin/travels/'.$travel->slug.'/tours', [
             'name' => 'test',
             'starting_date' => '2023-3-3',
             'ending_date' => '2023-3-5',
-            'price' => 200
+            'price' => 200,
         ]);
 
         $response->assertStatus(201);

@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\Travel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ListTravelsTest extends TestCase
 {

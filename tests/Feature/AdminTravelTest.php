@@ -62,9 +62,9 @@ class AdminTravelTest extends TestCase
 
         $travel = Travel::factory()->create();
 
-        $response = $this->actingAs($user)->postJson('api/v1/admin/travels/'.$travel->slug,[
+        $response = $this->actingAs($user)->postJson('api/v1/admin/travels/'.$travel->slug, [
             '_method' => 'patch',
-            'name' => 'name after update'
+            'name' => 'name after update',
         ]);
 
         $response->assertStatus(200);

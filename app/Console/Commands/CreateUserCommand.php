@@ -49,13 +49,13 @@ class CreateUserCommand extends Command
             'password' => ['required', Password::defaults()],
         ]);
 
-        if($validator->fails()){
-            foreach($validator->errors()->all() as $error){
+        if ($validator->fails()) {
+            foreach ($validator->errors()->all() as $error) {
                 $this->error($error);
             }
+
             return -1;
         }
-        ;
 
         DB::transaction(function () use ($userData, $role) {
             $userData['password'] = bcrypt($userData['password']);

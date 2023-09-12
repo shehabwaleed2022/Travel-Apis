@@ -22,10 +22,10 @@ class StoreTravelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'is_public' => ['required' , 'boolean'],
-            'name' => ['required' , 'string','min:3' , 'max:30', 'unique:travel,name'],
-            'description' => ['required' , 'string' , 'min:3' , 'max:255'],
-            'num_of_days' => ['required' , 'numeric' , 'min:1'],
+            'is_public' => ['required', 'boolean'],
+            'name' => ['required', 'string', 'min:3', 'max:30', 'unique:travel,name'],
+            'description' => ['required', 'string', 'min:3', 'max:255'],
+            'num_of_days' => ['required', 'numeric', 'min:1'],
         ];
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Helpers;
 
 class ApiResponse
@@ -10,6 +11,7 @@ class ApiResponse
             'msg' => $msg,
             'data' => $data,
         ];
+
         return response()->json($responseData, $status);
     }
 }

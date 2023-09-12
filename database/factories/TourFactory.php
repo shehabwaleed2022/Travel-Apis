@@ -19,8 +19,8 @@ class TourFactory extends Factory
         return [
             'name' => $this->faker->text(15),
             'starting_date' => now(),
-            'ending_date' => now()->addDays(rand(1,10)),
-            'price' => rand(1000,10000) * 100,
+            'ending_date' => now()->addDays(rand(1, 10)),
+            'price' => rand(1000, 10000) * 100,
         ];
     }
 }
