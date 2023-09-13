@@ -10,16 +10,22 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
+    private User $user;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->user = User::factory()->create([
+            'email' => 'shehab@gmail.com',
+            'password' => bcrypt('shehab')
+        ]);
+    }
+
     public function test_failed_login(): void
     {
-        $user = User::create([
-            'name' => 'shehab',
-            'email' => 'shehab@gmail.com',
-            'password' => 'shehab',
-        ]);
 
         $response = $this->post('/api/v1/login', [
-            'email' => $user->email,
+            'email' => $this->user->email,
             'password' => 'wrongPassword',
         ]);
 
@@ -28,14 +34,9 @@ class LoginTest extends TestCase
 
     public function test_success_login(): void
     {
-        $user = User::create([
-            'name' => 'shehab',
-            'email' => 'shehab@gmail.com',
-            'password' => 'shehab',
-        ]);
 
         $response = $this->post('/api/v1/login', [
-            'email' => $user->email,
+            'email' => $this->user->email,
             'password' => 'shehab',
         ]);
 

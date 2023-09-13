@@ -21,6 +21,7 @@ class AdminTourTest extends TestCase
     {
         parent::setUp();
 
+        $this->seed(RoleSeeder::class);
         $this->user = User::factory()->create();
         $this->travel = Travel::factory()->create();
     }
@@ -34,7 +35,6 @@ class AdminTourTest extends TestCase
 
     public function test_non_admin_cannot_add_tour(): void
     {
-        $this->seed(RoleSeeder::class);
         $this->user->roles()->attach(Role::where('name', 'editor')->value('id'));
 
         $response = $this->actingAs($this->user)->postJson('/api/v1/admin/travels/'.$this->travel->slug.'/tours');
@@ -44,7 +44,6 @@ class AdminTourTest extends TestCase
 
     public function test_admin_can_add_tour(): void
     {
-        $this->seed(RoleSeeder::class);
         $this->user->roles()->attach(Role::where('name', 'admin')->value('id'));
 
         $response = $this->actingAs($this->user)->postJson('/api/v1/admin/travels/'.$this->travel->slug.'/tours', [
