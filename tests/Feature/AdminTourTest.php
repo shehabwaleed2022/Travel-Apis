@@ -13,11 +13,21 @@ class AdminTourTest extends TestCase
     /**
      * A basic feature test example.
      */
+    private User $user;
+
+    private Travel $travel;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = User::factory()->create();
+        $this->travel = Travel::factory()->create();
+    }
+
     public function test_public_user_cannot_add_tour(): void
     {
-        $travel = Travel::factory()->create();
-
-        $response = $this->postJson('/api/v1/admin/travels/'.$travel->slug.'/tours');
+        $response = $this->postJson('/api/v1/admin/travels/'.$this->travel->slug.'/tours');
 
         $response->assertStatus(401);
     }
@@ -25,12 +35,9 @@ class AdminTourTest extends TestCase
     public function test_non_admin_cannot_add_tour(): void
     {
         $this->seed(RoleSeeder::class);
-        $user = User::factory()->create();
-        $user->roles()->attach(Role::where('name', 'editor')->value('id'));
+        $this->user->roles()->attach(Role::where('name', 'editor')->value('id'));
 
-        $travel = Travel::factory()->create();
-
-        $response = $this->actingAs($user)->postJson('/api/v1/admin/travels/'.$travel->slug.'/tours');
+        $response = $this->actingAs($this->user)->postJson('/api/v1/admin/travels/'.$this->travel->slug.'/tours');
 
         $response->assertStatus(403);
     }
@@ -38,12 +45,9 @@ class AdminTourTest extends TestCase
     public function test_admin_can_add_tour(): void
     {
         $this->seed(RoleSeeder::class);
-        $user = User::factory()->create();
-        $user->roles()->attach(Role::where('name', 'admin')->value('id'));
+        $this->user->roles()->attach(Role::where('name', 'admin')->value('id'));
 
-        $travel = Travel::factory()->create();
-
-        $response = $this->actingAs($user)->postJson('/api/v1/admin/travels/'.$travel->slug.'/tours', [
+        $response = $this->actingAs($this->user)->postJson('/api/v1/admin/travels/'.$this->travel->slug.'/tours', [
             'name' => 'test',
             'starting_date' => '2023-3-3',
             'ending_date' => '2023-3-5',
