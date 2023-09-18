@@ -17,7 +17,7 @@ class LoginTest extends TestCase
         parent::setUp();
         $this->user = User::factory()->create([
             'email' => 'shehab@gmail.com',
-            'password' => bcrypt('shehab')
+            'password' => bcrypt('shehab'),
         ]);
     }
 

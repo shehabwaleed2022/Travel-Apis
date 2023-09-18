@@ -9,9 +9,14 @@ use App\Http\Resources\TravelResource;
 
 class GetPublicTravelController extends Controller
 {
-    public function __invoke(GetPublicTravelAction $getPublicTravelAction)
+    public function __construct(
+        protected GetPublicTravelAction $getPublicTravelAction,
+    ){
+
+    }
+    public function __invoke()
     {
-        $travel = $getPublicTravelAction->execute();
+        $travel = $this->getPublicTravelAction->execute();
 
         if ($travel->count() == 0) {
             return ApiResponse::send(200, 'No travel avaliable now');

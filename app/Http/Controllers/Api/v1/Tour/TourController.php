@@ -12,9 +12,14 @@ use Illuminate\Http\JsonResponse;
 
 class TourController extends Controller
 {
-    public function index(TourListRequest $request, Travel $travel, GetTravelToursAction $getTravelToursAction)
+    public function __construct(
+        protected GetTravelToursAction $getTravelToursAction,
+    ){
+
+    }
+    public function index(TourListRequest $request, Travel $travel)
     {
-        $tours = $getTravelToursAction->execute($travel, $request->only(['priceFrom', 'priceTo', 'dateFrom', 'dateTo', 'sortBy', 'sortOrder']));
+        $tours = $this->getTravelToursAction->execute($travel, $request->only(['priceFrom', 'priceTo', 'dateFrom', 'dateTo', 'sortBy', 'sortOrder']));
 
         if ($tours->count() == 0) {
             return ApiResponse::send(JsonResponse::HTTP_NOT_FOUND, 'No tours found for this travel. ');
